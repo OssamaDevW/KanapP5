@@ -15,15 +15,20 @@ const image = makeImage(imageUrl,altTxt)
 const h3 = makeH3 (name)
 const p = makeParagraph (description)
 
-appendElementsToArticle(article, image, h3,p )
+appendElementsToArticle(article, [image, h3,p] )
 appendArticleToAnchor(anchor, article)
 })
 }
 
-function appendElementsToArticle(article, image, h3,p ){
+function appendElementsToArticle(article, array ){
+array.forEach ((item) => {
+  article.appendChild (item)
+}
+)
+/*
   article.appendChild(image)
   article.appendChild (h3)
-  article.appendChild (p)
+  article.appendChild (p)*/
 
 }
 
