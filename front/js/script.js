@@ -5,7 +5,6 @@ fetch("http://localhost:3000/api/products")
 function addProducts(data) {
 
 data.forEach ((kanap) => {
-  console.log("kanap: ", kanap)
 
 
 const {_id, imageUrl, altTxt, name, description} = kanap
@@ -15,7 +14,7 @@ const image = makeImage(imageUrl,altTxt)
 const h3 = makeH3 (name)
 const p = makeParagraph (description)
 
-appendElementsToArticle(article, [image, h3,p] )
+appendElementsToArticle(article, [image, h3, p] )
 appendArticleToAnchor(anchor, article)
 })
 }
@@ -44,7 +43,6 @@ const items = document.querySelector ("#items")
   if (items !=null) {
     items.appendChild (anchor)
     anchor.appendChild (article)
-    console.log ("elemnt ajouté a items", items)
  }
 }
 function makeImage (imageUrl,altTxt) {
