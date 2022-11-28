@@ -24,10 +24,7 @@ array.forEach ((item) => {
   article.appendChild (item)
 }
 )
-/*
-  article.appendChild(image)
-  article.appendChild (h3)
-  article.appendChild (p)*/
+
 
 }
 
