@@ -1,7 +1,6 @@
 const cart = []
 
 retrieveItemsFromCache ()
-console.log(cart)
 cart.forEach((item) => displayItem(item))
 
 /*
@@ -17,59 +16,60 @@ name: ma
 function retrieveItemsFromCache () {
 const numberOfItems = localStorage.length
 for (let i = 0; i < numberOfItems; i++) {
-    const item = localStorage.getItem(localStorage.key(i)) || ""
-const itemObjet = JSON.parse(item)
+    const item = localStorage.getItem(localStorage.key(i))  || ""
+    const itemObjet = JSON.parse(item)
 cart.push(itemObjet)
 }
 }
 
-function displayItem (item){
+function displayItem(item) {
     const article = makeArticle (item)
     const imageDiv = makeImageDiv(item)
     article.appendChild (imageDiv)
 
-    const cardItemContent = makeCartContent ( item) 
-    article.appendChild (cardItemContent)
-
+    makeCartContent ( item) 
     displayArticle (article)
 }
-/*
-function makeCardItemContent () {
-    const div = document.createElement ("div")
-    div.classList.add ("cart__item__content")
 
-}*/
-
-function makeCartContent ( item){
+function makeCartContent (item) {
     const cardItemContent = document.createElement ("div")
     cardItemContent.classList.add ("cart__item__content")
 
     const description=  makeDescription(item)
-    const settings = makeSettings(item)
+    const settings = makeSettings()
 
     cardItemContent.appendChild (description)
-    cardItemContent.appendChild (settings)
-
-    return cardItemContent
+    // cardItemContent.appendChild (settings)
+    // return cardItemContent
    
 }
 
 
 function makeSettings (item){
     const settings = document.createElement ("div")
-    settings.classList.add ("cart__item__content_settings")
+    settings.classList.add ("cart__item__content__settings")
 
     addQuantityToSettings (settings, item)
+    addDeleteToSettings (settings)
     return settings
 
 
+}
+
+function addDeleteToSettings (settings, item){
+    const div = document.createElement("div")
+    div.classList.add("cart__item__coontent__settings__delete")
+    const p = document.createElement("p")
+    p.textContent = supprimer
+    div.appendChild(p)
+    settings.appendChild(div)
 }
 
 function addQuantityToSettings (settings, item) {
     const quantity = document.createElement ("div")
     quantity.classList.add ("cart__item__content__settings__quantity")
     const p = document.createElement ("p")
-    p.textContent = quantity "Qté : "
+    p.textContent =  "Qté : "
     quantity.appendChild(p)
     const input  = document.createElement ("input")
     input.type = "number"
@@ -110,14 +110,14 @@ function displayArticle(article){
 
 function makeArticle (item){
     const article = document.createElement ("article")
-    article.classList.add ("card__item")
+    article.classList.add ("cart__item")
     article.dataset.id = item.id
     article.dataset.color = item.color
     return article
 }
 function makeImageDiv(item) {
     const div = document.createElement ("div")
-    div.classList.add("cart__item_img")
+    div.classList.add("cart__item__img")
 
     const image = document.createElement('img')
     image.src = item.imageUrl
