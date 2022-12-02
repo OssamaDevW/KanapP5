@@ -2,7 +2,6 @@ const cart = []
 
 retrieveItemsFromCache ()
 cart.forEach((item) => displayItem(item))
-
 /*
 altTxt: "Photo d'un canapé rose, une à deux place"
 color: "Pink"
@@ -12,7 +11,6 @@ price: 1499
 quantity: 6
 name: ma
 */
-
 function retrieveItemsFromCache () {
 const numberOfItems = localStorage.length
 for (let i = 0; i < numberOfItems; i++) {
@@ -26,9 +24,15 @@ function displayItem(item) {
     const article = makeArticle (item)
     const imageDiv = makeImageDiv(item)
     article.appendChild (imageDiv)
-
-    makeCartContent ( item) 
+    const cardItemContent = makeCartContent (item) 
+    article.appendChild (cardItemContent)
     displayArticle (article)
+    displayTotalQuantity  (item)
+}
+
+function displayTotalQuantity (item) {
+    const totalQuantity = document.querySelector ("#total__quantity")
+    totalQuantity.textContent = item.quantity 
 }
 
 function makeCartContent (item) {
@@ -36,11 +40,11 @@ function makeCartContent (item) {
     cardItemContent.classList.add ("cart__item__content")
 
     const description=  makeDescription(item)
-    const settings = makeSettings()
+    const settings = makeSettings(item)
 
     cardItemContent.appendChild (description)
-    // cardItemContent.appendChild (settings)
-    // return cardItemContent
+    cardItemContent.appendChild (settings)
+    return cardItemContent
    
 }
 
@@ -56,11 +60,11 @@ function makeSettings (item){
 
 }
 
-function addDeleteToSettings (settings, item){
+function addDeleteToSettings (settings){
     const div = document.createElement("div")
     div.classList.add("cart__item__coontent__settings__delete")
     const p = document.createElement("p")
-    p.textContent = supprimer
+    p.textContent = "supprimer"
     div.appendChild(p)
     settings.appendChild(div)
 }
@@ -78,7 +82,8 @@ function addQuantityToSettings (settings, item) {
     input.min = "1"
     input.max = "100"
     input.value = item.quantity
-    settings.appendChild (input)
+    quantity.appendChild (input)
+    settings.appendChild (quantity)
 
 
 
@@ -104,8 +109,8 @@ function makeDescription (item){
 }
 
 
-function displayArticle(article){
-    document.querySelector ("cart__items").appendChild(article)
+function displayArticle (article){
+    document.querySelector ("#cart__items").appendChild(article)
 }
 
 function makeArticle (item){
