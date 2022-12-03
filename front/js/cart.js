@@ -31,8 +31,13 @@ function displayItem(item) {
 }
 
 function displayTotalQuantity (item) {
-    const totalQuantity = document.querySelector ("#total__quantity")
-    totalQuantity.textContent = item.quantity 
+    let total = 0;
+    const totalQuantity = document.querySelector ("#totalQuantity")
+    cart.forEach((item) => {
+        const totalUnitPrice = item.price * item.quantity
+        total = total + totalUnitPrice
+}
+    )
 }
 
 function makeCartContent (item) {
