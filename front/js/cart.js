@@ -27,17 +27,14 @@ function displayItem(item) {
     const cardItemContent = makeCartContent (item) 
     article.appendChild (cardItemContent)
     displayArticle (article)
-    displayTotalQuantity  (item)
+    displayTotalPrice  ()
 }
 
-function displayTotalQuantity (item) {
-    let total = 0;
-    const totalQuantity = document.querySelector ("#totalQuantity")
-    cart.forEach((item) => {
-        const totalUnitPrice = item.price * item.quantity
-        total = total + totalUnitPrice
-}
-    )
+function displayTotalPrice () {
+    const totalPrice = document.querySelector ("#totalPrice")
+    const total = cart.reduce ((total, item) => total + item.price * item.quantity, 0)
+    totalPrice.textContent = total
+
 }
 
 function makeCartContent (item) {
